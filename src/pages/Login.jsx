@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     const emailCheck = email.toLowerCase().match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
@@ -22,6 +24,7 @@ function Login() {
         <input
           data-testid="email-input"
           type="email"
+          value={ email }
           placeholder="Digite seu email"
           onChange={ ({ target }) => setEmail(target.value) }
         />
@@ -37,6 +40,13 @@ function Login() {
           data-testid="login-submit-btn"
           type="button"
           disabled={ disabled }
+          onClick={ () => {
+            const user = {
+              email,
+            };
+            localStorage.user = JSON.stringify(user);
+            history.push('/meals');
+          } }
         >
           Enter
         </button>
