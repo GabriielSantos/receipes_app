@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router';
 import RecipesContext from '../context/RecipesContext';
 import Button from '../components/Button';
+import Header from '../components/Header';
 
 function Profile() {
   const { appState, setAppState } = useContext(RecipesContext);
@@ -20,6 +21,7 @@ function Profile() {
 
   return (
     <section className="section-profile">
+      <Header />
       <p data-testid="profile-email">{user.email}</p>
       <Button
         dataTestId="profile-done-btn"

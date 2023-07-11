@@ -1,11 +1,9 @@
 import React from 'react';
 
-function DoneRecipes() {
+import Header from '../components/Header';
+
+export default function DoneRecipes() {
   return (
-    <div>
-      <h1>Done Recipes</h1>
-    </div>
+    <Header />
   );
 }
-
-export default DoneRecipes;
