@@ -4,6 +4,9 @@ import Header from '../components/Header';
 
 export default function FavoriteRecipes() {
   return (
-    <Header />
+    <>
+      <Header />
+      <h1>Favorite</h1>
+    </>
   );
 }
