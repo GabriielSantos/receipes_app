@@ -7,7 +7,3 @@ export default function DoneRecipes() {
     <Header />
   );
 }
-
-
-
-

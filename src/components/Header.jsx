@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 
 export default function Header() {
   const location = useLocation();
@@ -31,11 +32,13 @@ export default function Header() {
 
   const handleSearchClick = () => {
     const searchInput = document.querySelector('input');
-    if (searchInput.style.display === 'none') {
-      searchInput.style.display = 'block';
+    const searchContent = document.querySelector('[data-testid="search-content"]');
+
+    if (searchContent.style.display === 'none') {
+      searchContent.style.display = 'block';
       searchInput.dataset.testid = 'search-input';
     } else {
-      searchInput.style.display = 'none';
+      searchContent.style.display = 'none';
       searchInput.dataset.testid = '';
     }
   };
@@ -62,7 +65,7 @@ export default function Header() {
         </button>
       )}
       <h1 data-testid="page-title">{getTitle()}</h1>
-      <input data-testid="search-input" style={ { display: 'none' } } />
+      <SearchBar />
     </div>
   );
 }

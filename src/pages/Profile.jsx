@@ -1,4 +1,3 @@
-
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router';
 import RecipesContext from '../context/RecipesContext';
@@ -44,4 +43,3 @@ function Profile() {
 }
 
 export default Profile;
-
