@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import RecipesContext from '../context/RecipesContext';
 import Button from '../components/Button';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function Profile() {
   const { appState, setAppState } = useContext(RecipesContext);
@@ -38,6 +39,7 @@ function Profile() {
       <Button dataTestId="profile-logout-btn" onClick={ handleLogout }>
         Logout
       </Button>
+      <Footer />
     </section>
   );
 }
