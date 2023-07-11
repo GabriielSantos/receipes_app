@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Header from '../components/Header';
 
 export default function FavoriteRecipes() {
@@ -6,3 +7,6 @@ export default function FavoriteRecipes() {
     <Header />
   );
 }
+
+
+
