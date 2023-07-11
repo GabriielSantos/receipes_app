@@ -1,6 +1,6 @@
-import { getDrinks } from './api';
+import { getDrinks, getDrinksCategories } from './api';
 
-export const fetchDrinks = async () => {
+const fetchDrinks = async () => {
   const firstTwelveDrinks = 12;
   const newDrinks = [];
   const drinks = await getDrinks();
@@ -9,3 +9,15 @@ export const fetchDrinks = async () => {
 
   return newDrinks;
 };
+
+const fetchDrinksByCategory = async () => {
+  const firstFiveDrinks = 5;
+  const newDrinksCategory = [];
+  const drinks = await getDrinksCategories();
+  drinks.filter((drink, index) => index < firstFiveDrinks
+      && newDrinksCategory.push(drink));
+
+  return newDrinksCategory;
+};
+
+export { fetchDrinks, fetchDrinksByCategory };

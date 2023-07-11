@@ -1,6 +1,6 @@
-import { getMeals } from './api';
+import { getMeals, getMealsCategories } from './api';
 
-export const fetchMeals = async () => {
+const fetchMeals = async () => {
   const firstTwelveMeals = 12;
   const newMeals = [];
   const meals = await getMeals();
@@ -9,3 +9,15 @@ export const fetchMeals = async () => {
 
   return newMeals;
 };
+
+const fetchMealsByCategory = async () => {
+  const firstFiveMeals = 5;
+  const newMealsCategory = [];
+  const meals = await getMealsCategories();
+  meals.filter((meal, index) => index < firstFiveMeals
+      && newMealsCategory.push(meal));
+
+  return newMealsCategory;
+};
+
+export { fetchMeals, fetchMealsByCategory };
