@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import shareIcon from '../images/shareIcon.svg';
 import Header from '../components/Header';
+import shareIcon from '../images/shareIcon.svg';
 
 function DoneRecipes() {
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
