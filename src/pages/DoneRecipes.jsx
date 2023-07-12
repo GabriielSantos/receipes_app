@@ -20,7 +20,9 @@ function DoneRecipes() {
 
   return (
     <div>
-      <Header />
+      <div>
+        <Header />
+      </div>
       {filteredRecipes.map((recipe, index) => (
         <div key={ index }>
           <img
