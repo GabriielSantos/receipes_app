@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import shareIcon from '../images/shareIcon.svg';
+import Header from '../components/Header';
 
 function DoneRecipes() {
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
@@ -19,6 +20,7 @@ function DoneRecipes() {
 
   return (
     <div>
+      <Header />
       {filteredRecipes.map((recipe, index) => (
         <div key={ index }>
           <img
