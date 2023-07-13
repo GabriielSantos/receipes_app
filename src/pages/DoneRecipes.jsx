@@ -1,76 +1,91 @@
-import React, { useState } from 'react';
-import shareIcon from '../images/shareIcon.svg';
+import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
+import shareIcon from '../images/shareIcon.svg';
 
 function DoneRecipes() {
-  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
-  const [filter, setFilter] = useState('');
+  const [doneRecipes, setDoneRecipes] = useState([]);
+  const [filterType, setFilterType] = useState('all');
 
-  const handleShareRecipe = (recipeId) => {
-    console.log('Share recipe:', recipeId);
+  useEffect(() => {
+    const storedDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+    setDoneRecipes(storedDoneRecipes);
+  }, []);
+
+  const handleShareButton = (recipe) => {
+    const url = `http://localhost:3000/${recipe.type}s/${recipe.id}`;
+    navigator.clipboard.writeText(url);
+    const copyLink = document.createElement('p');
+    copyLink.innerHTML = 'Link copied!';
+    document.getElementById('divDoneRecipes').appendChild(copyLink);
   };
 
   const handleFilter = (type) => {
-    setFilter(type);
+    setFilterType(type);
   };
 
-  const filteredRecipes = filter
-    ? doneRecipes.filter((recipe) => recipe.type === filter)
-    : doneRecipes;
+  const filteredRecipes = filterType === 'all'
+    ? doneRecipes
+    : doneRecipes.filter((recipe) => recipe.type === filterType);
 
   return (
     <div>
-      <div>
-        <Header />
-      </div>
-      {filteredRecipes.map((recipe, index) => (
-        <div key={ index }>
-          <img
-            src={ recipe.image }
-            alt={ recipe.name }
-            data-testid={ `${index}-horizontal-image` }
-          />
-          <p data-testid={ `${index}-horizontal-top-text` }>
-            {`${recipe.strArea ? recipe.strArea : ''} - ${
-              recipe.strCategory ? recipe.strCategory : ''
-            }`}
-          </p>
-          <h3 data-testid={ `${index}-horizontal-name` }>{recipe.name}</h3>
-          <p data-testid={ `${index}-horizontal-done-date` }>{recipe.doneDate}</p>
-          <button
-            data-testid={ `${index}-horizontal-share-btn` }
-            onClick={ () => handleShareRecipe(recipe.id) }
-          >
-            <img src={ shareIcon } alt="Share" />
-          </button>
-          {recipe.tags.slice(0, 2).map((tag, tagIndex) => (
-            <span
-              key={ tagIndex }
-              data-testid={ `${index}-${tag}-horizontal-tag` }
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      ))}
+      <Header />
       <button
+        type="button"
         data-testid="filter-by-all-btn"
-        onClick={ () => handleFilter('') }
+        onClick={ () => handleFilter('all') }
       >
         All
       </button>
       <button
+        type="button"
         data-testid="filter-by-meal-btn"
         onClick={ () => handleFilter('meal') }
       >
         Meals
       </button>
       <button
+        type="button"
         data-testid="filter-by-drink-btn"
         onClick={ () => handleFilter('drink') }
       >
         Drinks
       </button>
+
+      {filteredRecipes.map((recipe, index) => (
+        <div id="divDoneRecipes" key={ recipe.id }>
+          <a href={ `/${recipe.type}s/${recipe.id}` }>
+            <img
+              src={ recipe.image }
+              alt={ recipe.name }
+              data-testid={ `${index}-horizontal-image` }
+            />
+          </a>
+          <p data-testid={ `${index}-horizontal-top-text` }>
+            {recipe.type === 'drink'
+              ? recipe.alcoholicOrNot : `${recipe.nationality} - ${recipe.category}`}
+          </p>
+          <a href={ `/${recipe.type}s/${recipe.id}` }>
+            <p data-testid={ `${index}-horizontal-name` }>{recipe.name}</p>
+          </a>
+          <p data-testid={ `${index}-horizontal-done-date` }>{recipe.doneDate}</p>
+          {recipe.tags.slice(0, 2).map((tag, tagIndex) => (
+            <span key={ tagIndex } data-testid={ `${index}-${tag}-horizontal-tag` }>
+              {tag}
+            </span>
+          ))}
+          <button
+            type="button"
+            onClick={ () => handleShareButton(recipe) }
+          >
+            <img
+              src={ shareIcon }
+              alt=""
+              data-testid={ `${index}-horizontal-share-btn` }
+            />
+          </button>
+        </div>
+      ))}
     </div>
   );
 }
