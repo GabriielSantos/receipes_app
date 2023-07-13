@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getDrinksByCategory, getMealsByCategory } from '../services/api';
 import { fetchDrinks, fetchDrinksByCategory } from '../services/fetchDrinks';
 import { fetchMeals, fetchMealsByCategory } from '../services/fetchMeals';
+import RecipesContext from '../context/RecipesContext';
 
 function Recipes() {
   const history = useHistory();
@@ -13,6 +14,7 @@ function Recipes() {
   const [newMealsByCategory, setNewMealsByCategory] = useState([]);
   const [newDrinksByCategory, setNewDrinksByCategory] = useState([]);
   const [category, setCategory] = useState('');
+  const { setIdSelected } = useContext(RecipesContext);
 
   useEffect(() => {
     fetchMeals().then((data) => {
@@ -61,13 +63,14 @@ function Recipes() {
     setCategory('');
   };
 
-  const handleCardClick = (id) => {
+  const handleCardClick = (id, type) => {
     const currentPath = history.location.pathname;
     if (currentPath === '/meals') {
       history.push(`/meals/${id}`);
     } else if (currentPath === '/drinks') {
       history.push(`/drinks/${id}`);
     }
+    setIdSelected({ id, type });
   };
 
   return (
@@ -110,7 +113,7 @@ function Recipes() {
             <button
               key={ index }
               data-testid={ `${index}-recipe-card` }
-              onClick={ () => handleCardClick(meal.idMeal) }
+              onClick={ () => handleCardClick(meal.idMeal, 'meal') }
             >
               <img
                 src={ meal.strMealThumb }
@@ -125,7 +128,7 @@ function Recipes() {
             <button
               key={ index }
               data-testid={ `${index}-recipe-card` }
-              onClick={ () => handleCardClick(drink.idDrink) }
+              onClick={ () => handleCardClick(drink.idDrink, 'drink') }
             >
               <img
                 src={ drink.strDrinkThumb }
@@ -135,7 +138,7 @@ function Recipes() {
               <h2 data-testid={ `${index}-card-name` }>{drink.strDrink}</h2>
             </button>
           ))
-        ) }
+        )}
       </div>
     </>
   );

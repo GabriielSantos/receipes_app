@@ -7,6 +7,7 @@ import RecipesContext from './RecipesContext';
 function RecipesProvider({ children }) {
   const [appState, setAppState] = useState({ user: { email: 'email@mail.com' } });
   const [idsSearched, setIdsSearched] = useState([]);
+  const [idSelected, setIdSelected] = useState([]);
   const [data, setData] = useState([]);
   const [isSearch, setIsSearch] = useState(false);
   const route = useHistory();
@@ -35,9 +36,19 @@ function RecipesProvider({ children }) {
       setData,
       isSearch,
       setIsSearch,
+      idSelected,
+      setIdSelected,
       route,
     }),
-    [appState, setAppState, setIsSearch, isSearch, data, idsSearched, route],
+    [appState,
+      setAppState,
+      setIsSearch,
+      idSelected,
+      setIdSelected,
+      isSearch,
+      data,
+      idsSearched,
+      route],
   );
 
   return (
