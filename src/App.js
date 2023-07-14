@@ -11,7 +11,9 @@ import RecipesDetailsDrinks from './pages/RecipesDetailsDrinks';
 import RecipesContext from './context/RecipesContext';
 
 function App() {
-  const { idSelected } = useContext(RecipesContext);
+  const { route, id } = useContext(RecipesContext);
+  const pathParts = route.location.pathname.split('/');
+  const idFromPath = pathParts[pathParts.length - 1];
 
   return (
     <Switch>
@@ -19,14 +21,14 @@ function App() {
       <Route exact path="/meals" component={ Meals } />
       <Route
         exact
-        path={ `/meals/${idSelected.id}` }
+        path={ `/meals/${idFromPath || id}` }
         component={ RecipesDetailsMeals }
       />
       <Route exact path="/meals/:id-da-receita/in-progress" />
       <Route exact path="/drinks" component={ Drinks } />
       <Route
         exact
-        path={ `/drinks/${idSelected.id}` }
+        path={ `/drinks/${idFromPath || id}` }
         component={ RecipesDetailsDrinks }
       />
       <Route exact path="/drinks/:id-da-receita/in-progress" />
