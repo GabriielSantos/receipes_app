@@ -6,7 +6,7 @@ import RecipesContext from '../context/RecipesContext';
 
 function Recipes() {
   const {
-    setId,
+    handleCardClick,
     route,
     newDrinks,
     newMeals } = useContext(RecipesContext);
@@ -60,16 +60,6 @@ function Recipes() {
 
   const handleRemoveFilter = () => {
     setCategory('');
-  };
-
-  const handleCardClick = (id) => {
-    const currentPath = route.location.pathname;
-    if (currentPath === '/meals') {
-      route.push(`/meals/${id}`);
-    } else if (currentPath === '/drinks') {
-      route.push(`/drinks/${id}`);
-    }
-    setId(id);
   };
 
   return (

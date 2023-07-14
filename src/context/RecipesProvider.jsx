@@ -36,8 +36,19 @@ function RecipesProvider({ children }) {
     fetchMeals().then((items) => setNewMeals(items));
   }, []);
 
+  const handleCardClick = (elem) => {
+    const currentPath = route.location.pathname;
+    if (currentPath === '/meals') {
+      route.push(`/meals/${elem}`);
+    } else if (currentPath === '/drinks') {
+      route.push(`/drinks/${elem}`);
+    }
+    setId(elem);
+  };
+
   const contextValue = useMemo(
     () => ({
+      handleCardClick,
       appState,
       setAppState,
       idsSearched,
@@ -54,9 +65,10 @@ function RecipesProvider({ children }) {
       setNewDrinks,
       route,
       id,
-      setId,
     }),
-    [appState,
+    [
+      handleCardClick,
+      appState,
       newDrinks,
       setNewDrinks,
       newMeals,
@@ -69,7 +81,6 @@ function RecipesProvider({ children }) {
       data,
       idsSearched,
       id,
-      setId,
       route],
   );
 

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import RecipesContext from '../context/RecipesContext';
 
 function RecipesFilterSuccess() {
-  const { data, route } = useContext(RecipesContext);
+  const { data, route, handleCardClick } = useContext(RecipesContext);
   const maxItens = 12;
   return (
     <div>

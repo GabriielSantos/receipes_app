@@ -1,23 +1,23 @@
 .containerRecommendations {
-    display: flex;
-    overflow-x: scroll;
-    overflow-y: hidden;
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 .containerRecommendations img {
-    width: 170px;
-    height: 170px;
+  height: 170px;
+  width: 170px;
 }
 
 .start-btn {
-    background-color: #f44336;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    position: fixed;
-    bottom: 0;
-    left: 90px;
+  background-color: #f44336;
+  border: none;
+  bottom: 0;
+  color: white;
+  font-size: 16px;
+  left: 90px;
+  padding: 10px 20px;
+  position: fixed;
+  text-align: center;
+  text-decoration: none;
 }
