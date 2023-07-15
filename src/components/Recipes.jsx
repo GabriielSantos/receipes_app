@@ -1,26 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
 import { getDrinksByCategory, getMealsByCategory } from '../services/api';
 import { fetchDrinks, fetchDrinksByCategory } from '../services/fetchDrinks';
 import { fetchMeals, fetchMealsByCategory } from '../services/fetchMeals';
+import RecipesContext from '../context/RecipesContext';
 
 function Recipes() {
-  const history = useHistory();
+  const {
+    handleCardClick,
+    route,
+    newDrinks,
+    newMeals } = useContext(RecipesContext);
+
   const [meals, setMealsByFilter] = useState([]);
   const [drinks, setDrinksByFilter] = useState([]);
-  const [newDrinks, setNewDrinks] = useState([]);
-  const [newMeals, setNewMeals] = useState([]);
   const [newMealsByCategory, setNewMealsByCategory] = useState([]);
   const [newDrinksByCategory, setNewDrinksByCategory] = useState([]);
   const [category, setCategory] = useState('');
 
   useEffect(() => {
     fetchMeals().then((data) => {
-      setNewMeals(data);
       setMealsByFilter(data);
     });
     fetchDrinks().then((data) => {
-      setNewDrinks(data);
       setDrinksByFilter(data);
     });
     fetchMealsByCategory().then((data) => setNewMealsByCategory(data));
@@ -30,13 +31,13 @@ function Recipes() {
   useEffect(() => {
     const twelve = 12;
     if (category !== '') {
-      if (history.location.pathname === '/meals') {
+      if (route.location.pathname === '/meals') {
         getMealsByCategory(category)
           .then((data) => {
             const filteredMeals = data.filter((_, index) => index < twelve);
             setMealsByFilter(filteredMeals);
           });
-      } else if (history.location.pathname === '/drinks') {
+      } else if (route.location.pathname === '/drinks') {
         getDrinksByCategory(category)
           .then((data) => {
             const filteredDrinks = data.filter((_, index) => index < twelve);
@@ -47,7 +48,7 @@ function Recipes() {
       setMealsByFilter(newMeals);
       setDrinksByFilter(newDrinks);
     }
-  }, [category, history.location.pathname, newDrinks, newMeals]);
+  }, [category, route.location.pathname, newDrinks, newMeals]);
 
   const handleCategoryFilter = (selectedCategory) => {
     if (selectedCategory === category) {
@@ -61,19 +62,10 @@ function Recipes() {
     setCategory('');
   };
 
-  const handleCardClick = (id) => {
-    const currentPath = history.location.pathname;
-    if (currentPath === '/meals') {
-      history.push(`/meals/${id}`);
-    } else if (currentPath === '/drinks') {
-      history.push(`/drinks/${id}`);
-    }
-  };
-
   return (
     <>
       <div>
-        {history.location.pathname === '/meals' ? (
+        {route.location.pathname === '/meals' ? (
           newMealsByCategory.map((meal, index) => (
             <button
               key={ index }
@@ -105,7 +97,7 @@ function Recipes() {
         All
       </button>
       <div>
-        {history.location.pathname === '/meals' ? (
+        {route.location.pathname === '/meals' ? (
           meals.map((meal, index) => (
             <button
               key={ index }
@@ -135,7 +127,7 @@ function Recipes() {
               <h2 data-testid={ `${index}-card-name` }>{drink.strDrink}</h2>
             </button>
           ))
-        ) }
+        )}
       </div>
     </>
   );
