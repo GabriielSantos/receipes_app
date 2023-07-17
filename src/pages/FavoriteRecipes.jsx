@@ -6,7 +6,7 @@ export default function FavoriteRecipes() {
   return (
     <>
       <Header />
-      <h1>Favorite</h1>
+      <h1>teste</h1>
     </>
   );
 }
