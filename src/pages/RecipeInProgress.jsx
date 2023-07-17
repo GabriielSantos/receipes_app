@@ -24,6 +24,14 @@ function RecipeInProgress() {
   useEffect(() => {
     const getStorage = () => `checkedItem_${location.pathname}`;
 
+    const checketdItemsStore = JSON.parse(localStorage
+      .getItem(getStorage())) || [];
+    setCheckedItem(checketdItemsStore);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const getStorage = () => `checkedItem_${location.pathname}`;
+
     localStorage.setItem(getStorage(), JSON.stringify(checkedItem));
   }, [checkedItem, location.pathname]);
 
