@@ -1,9 +1,9 @@
-import { screen, waitFor, fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { renderWithRouter } from './helpers/renderWithRouter';
+import drinks from '../../cypress/mocks/drinks';
 import App from '../App';
 import RecipeInProgress from '../pages/RecipeInProgress';
-import drinks from '../../cypress/mocks/drinks';
+import { renderWithRouter } from './helpers/renderWithRouter';
 
 describe('Verifica a página RecipeInProgress', () => {
   beforeEach(async () => {

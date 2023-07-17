@@ -116,6 +116,7 @@ describe('Testa a página DoneRecipes', () => {
     expect(doneDate).toHaveLength(1);
     expect(shareBtn).toHaveLength(1);
   });
+
   it('Testa se ao clicar no botão drinks apenas as receitas de bebida são exibidas', () => {
     const filterByDrinkBtn = screen.getByTestId('filter-by-drink-btn');
     expect(filterByDrinkBtn).toBeInTheDocument();
