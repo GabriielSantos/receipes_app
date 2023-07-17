@@ -16,6 +16,7 @@ function RecipesProvider({ children }) {
   const [newMeals, setNewMeals] = useState([]);
   const [newDrinks, setNewDrinks] = useState([]);
   const route = useHistory();
+  const [filterType, setFilterType] = useState('all');
 
   useEffect(() => {
     if (data?.meals?.length === 1) {
@@ -65,6 +66,8 @@ function RecipesProvider({ children }) {
       setNewDrinks,
       route,
       id,
+      filterType,
+      setFilterType,
     }),
     [
       handleCardClick,
@@ -81,6 +84,8 @@ function RecipesProvider({ children }) {
       data,
       idsSearched,
       id,
+      filterType,
+      setFilterType,
       route],
   );
 
