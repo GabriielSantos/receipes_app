@@ -1,7 +1,7 @@
-import React from 'react';
 import { render } from '@testing-library/react';
-import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
+import React from 'react';
+import { Router } from 'react-router-dom';
 
 export const renderWithRouter = (component, route = '/') => {
   const history = createMemoryHistory({ initialEntries: [route] });
@@ -15,5 +15,3 @@ export const renderWithRouter = (component, route = '/') => {
     history,
   };
 };
-
-export default renderWithRouter;
