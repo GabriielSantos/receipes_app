@@ -1,19 +1,28 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import RecipesContext from '../context/RecipesContext';
 import { getSearchBar } from '../services/apiSearch';
 
 function SearchBar() {
   const [searchInput, setSearchInput] = useState('');
   const [searchType, setSearchType] = useState('');
   const route = useHistory();
+  const { setData, setIsSearch } = useContext(RecipesContext);
 
-  const handleClickSearch = () => {
+  const handleClickSearch = async () => {
     const routeSearch = route.location.pathname;
 
     if (searchType === 'First Letter' && searchInput.length > 1) {
       return global.alert('Your search must have only 1 (one) character');
     }
-    getSearchBar(searchInput, searchType, routeSearch);
+
+    try {
+      const responseAPI = await getSearchBar(searchInput, searchType, routeSearch);
+      setData(responseAPI);
+      setIsSearch(true);
+    } catch (error) {
+      global.alert('Falha na Requisição a API ');
+    }
   };
 
   return (
