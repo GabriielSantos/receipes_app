@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 
-function RecipeInProgressPage() {
+function RecipeInProgress() {
   const { id } = useParams();
   const location = useLocation();
   const [recipe, setRecipe] = useState('');
@@ -20,6 +20,7 @@ function RecipeInProgressPage() {
 
     fetchRecipe();
   }, [id, location.pathname]);
+
   useEffect(() => {
     const getStorage = () => `checkedItem_${location.pathname}`;
 
@@ -124,4 +125,4 @@ function RecipeInProgressPage() {
   );
 }
 
-export default RecipeInProgressPage;
+export default RecipeInProgress;
