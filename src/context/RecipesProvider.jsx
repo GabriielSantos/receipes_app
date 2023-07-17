@@ -2,9 +2,9 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import RecipesContext from './RecipesContext';
 import { fetchDrinks } from '../services/fetchDrinks';
 import { fetchMeals } from '../services/fetchMeals';
+import RecipesContext from './RecipesContext';
 
 function RecipesProvider({ children }) {
   const [appState, setAppState] = useState({ user: { email: 'email@mail.com' } });

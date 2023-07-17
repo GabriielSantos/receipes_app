@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
-import shareIcon from '../images/shareIcon.svg';
 import RecipesContext from '../context/RecipesContext';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../style/favoriteRecipes.css';
 
@@ -10,13 +10,13 @@ export default function FavoriteRecipes() {
   const { filterType, setFilterType } = useContext(RecipesContext);
   const [favoriteRecipes, setfavoriteRecipes] = useState([]);
   const [isFavorite] = useState(false);
-  const [verifyFavorites, setVerifyFavorites] = useState(false);
+  const [verify, setVerify] = useState(false);
 
   useEffect(() => {
     const storageFavoriteRecipes = JSON.parse(localStorage
       .getItem('favoriteRecipes')) || [];
     setfavoriteRecipes(storageFavoriteRecipes);
-  }, []);
+  }, [verify]);
 
   const handleShareButton = (recipe) => {
     const url = `http://localhost:3000/${recipe.type}s/${recipe.id}`;
@@ -35,28 +35,16 @@ export default function FavoriteRecipes() {
       'favoriteRecipes',
       JSON.stringify(filterFavoriteRecipes),
     );
-    if (storageFavoriteRecipes.length > 0) {
-      setVerifyFavorites(false);
-    } else {
-      setVerifyFavorites(true);
-    }
+    setVerify(!verify);
   };
-
-  useEffect(() => {
-    console.log(verifyFavorites);
-  }, [verifyFavorites]);
 
   const handleFilter = (type) => {
     setFilterType(type);
   };
 
-  const filteredRecipes = filterType === 'all'
+  const filteredRecipes = (filterType === 'all')
     ? favoriteRecipes
     : favoriteRecipes.filter((recipe) => recipe.type === filterType);
-
-  // const openRecipe = () => {
-  //   route.push(`/${recipe.type}s/${recipe.id}`);
-  // };
 
   return (
     <div>

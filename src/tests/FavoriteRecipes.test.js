@@ -3,8 +3,10 @@ import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouter from './helpers/renderWithRouter';
 
+const filterByMeal = 'filter-by-meal-btn';
+
 describe('Testa a página DoneRecipes', () => {
-  localStorage.setItem('doneRecipes', JSON.stringify([
+  localStorage.setItem('favoriteRecipes', JSON.stringify([
     {
       id: '52977',
       type: 'meal',
@@ -13,8 +15,6 @@ describe('Testa a página DoneRecipes', () => {
       alcoholicOrNot: '',
       name: 'Spicy Arrabiata Penne',
       image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-      doneDate: '2023-07-13T18:05:19.646Z',
-      tags: ['Pasta', 'Curry'],
     },
     {
       id: '178319',
@@ -24,16 +24,14 @@ describe('Testa a página DoneRecipes', () => {
       alcoholicOrNot: 'Alcoholic',
       name: 'Aquamarine',
       image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-      doneDate: '2023-07-13T18:05:19.646Z',
-      tags: [],
     },
   ]));
   beforeEach(() => {
-    renderWithRouter(<App />, { initialEntries: ['/done-recipes'] });
+    renderWithRouter(<App />, { initialEntries: ['/favorite-recipes'] });
   });
   it('Testa se a página contém os elementos esperados', () => {
     const filterByAllBtn = screen.getByTestId('filter-by-all-btn');
-    const filterByFoodBtn = screen.getByTestId('filter-by-meal-btn');
+    const filterByFoodBtn = screen.getByTestId(filterByMeal);
     const filterByDrinkBtn = screen.getByTestId('filter-by-drink-btn');
 
     expect(filterByAllBtn).toBeInTheDocument();
@@ -99,7 +97,7 @@ describe('Testa a página DoneRecipes', () => {
   });
 
   it('Testa se ao clicar no botão meals apenas as receitas de comida são exibidas', () => {
-    const filterByFoodBtn = screen.getByTestId('filter-by-meal-btn');
+    const filterByFoodBtn = screen.getByTestId(filterByMeal);
     expect(filterByFoodBtn).toBeInTheDocument();
 
     userEvent.click(filterByFoodBtn);
@@ -138,5 +136,23 @@ describe('Testa a página DoneRecipes', () => {
 
     const image2 = screen.getAllByTestId(/-horizontal-image/i);
     expect(image2).toHaveLength(2);
+  });
+  it('Testa se ao clicar no botão de favorite a receita é removidada da tela', () => {
+    const filterByFoodBtn = screen.getByTestId(filterByMeal);
+    expect(filterByFoodBtn).toBeInTheDocument();
+
+    userEvent.click(filterByFoodBtn);
+
+    const name = screen.getByTestId('0-horizontal-name');
+    const favoriteBtn = screen.getByTestId('0-horizontal-favorite-btn');
+
+    expect(name).toBeInTheDocument();
+    expect(name).toHaveTextContent('Spicy Arrabiata Penne');
+
+    userEvent.click(favoriteBtn);
+
+    const name1 = screen.getByTestId('0-horizontal-name');
+
+    expect(name1).toHaveTextContent('Aquamarine');
   });
 });
