@@ -1,0 +1,9 @@
+img {
+  height: 170px;
+  width: 170px;
+}
+
+button > img {
+ width: 30px;
+ height: 30px;
+}

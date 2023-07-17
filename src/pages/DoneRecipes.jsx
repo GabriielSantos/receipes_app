@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
+import RecipesContext from '../context/RecipesContext';
 
 function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState([]);
-  const [filterType, setFilterType] = useState('all');
+  const { filterType, setFilterType } = useContext(RecipesContext);
 
   useEffect(() => {
     const storedDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
