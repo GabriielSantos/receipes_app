@@ -3,7 +3,7 @@ import { createMemoryHistory } from 'history';
 import React from 'react';
 import { Router } from 'react-router-dom';
 
-export const renderWithRouter = (component, route = '/') => {
+const renderWithRouter = (component, route = '/') => {
   const history = createMemoryHistory({ initialEntries: [route] });
 
   return {
@@ -15,3 +15,5 @@ export const renderWithRouter = (component, route = '/') => {
     history,
   };
 };
+
+export default renderWithRouter;
