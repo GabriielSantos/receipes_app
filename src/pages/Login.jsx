@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import logoRecipes from '../style/imgs/logoRecipes.svg';
+import tomate from '../style/imgs/tomate.svg';
+import '../style/Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -19,40 +22,45 @@ function Login() {
   }, [email, password]);
 
   return (
-    <section>
-      <form>
-        <input
-          data-testid="email-input"
-          type="email"
-          value={ email }
-          placeholder="Digite seu email"
-          onChange={ ({ target }) => setEmail(target.value) }
-        />
+    <div className="loginContainer">
+      <img src={ tomate } alt="tomate" className="tomate" />
+      <img src={ logoRecipes } alt="logo" className="logoRecipes" />
+      <section className="formContainer">
+        <h3>LOGIN</h3>
+        <form className="loginInputs">
+          <input
+            data-testid="email-input"
+            type="email"
+            value={ email }
+            placeholder="Email"
+            onChange={ ({ target }) => setEmail(target.value) }
+          />
 
-        <input
-          data-testid="password-input"
-          type="password"
-          placeholder="Insira sua senha"
-          onChange={ ({ target }) => setPassword(target.value) }
-        />
+          <input
+            data-testid="password-input"
+            type="password"
+            placeholder="Password"
+            onChange={ ({ target }) => setPassword(target.value) }
+          />
 
-        <button
-          data-testid="login-submit-btn"
-          type="button"
-          disabled={ disabled }
-          onClick={ () => {
-            const user = {
-              email,
-            };
-            localStorage.user = JSON.stringify(user);
-            history.push('/meals');
-          } }
-        >
-          Enter
-        </button>
+          <button
+            data-testid="login-submit-btn"
+            type="button"
+            disabled={ disabled }
+            onClick={ () => {
+              const user = {
+                email,
+              };
+              localStorage.user = JSON.stringify(user);
+              history.push('/meals');
+            } }
+          >
+            ENTER
+          </button>
 
-      </form>
-    </section>
+        </form>
+      </section>
+    </div>
   );
 }
 

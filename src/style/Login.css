@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.loginContainer {
+  background: linear-gradient(180deg, #41197F 60%, white 40%);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.logoRecipes {
+  position: relative;
+  width: 198px;
+  height: 157px;
+  top: -220px;
+  left: 81px;
+}
+
+.tomate {
+  position: relative;
+  width: 458px;
+  height: 279px;
+  top: 215px;
+  left: -60px;
+}
+
+.loginInputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formContainer h3 {
+  margin-top: 25px;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #41197F;
+  font-family: 'Epilogue', sans-serif;
+  line-height: 20px;
+  letter-spacing: 2px;
+}
+
+.loginInputs input {
+  padding: 10px;
+  margin-bottom: 5px;
+  border: solid 0.5px #42197fa1;
+  border-radius: 5px;
+  width: 276px;
+  height: 40px;
+  color: #41197F;
+}
+
+.loginInputs button {
+  padding: 10px;
+  width: 276px;
+  height: 40px;
+  background-color: #FCC436;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-family: 'Epilogue', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  /* letter-spacing: 2px; */
+}
