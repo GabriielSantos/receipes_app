@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import { favRecipe,
+  saveFavRecipe } from '../services/InProgressStorageFunctions';
 
-function RecipeInProgress() {
+function RecipeInProgressPage() {
   const { id } = useParams();
   const location = useLocation();
-  const [recipe, setRecipe] = useState('');
+  const [recipe, setRecipe] = useState(null);
   const [checkedItem, setCheckedItem] = useState([]);
+  const [isFavOrNot, setIsFavOrNot] = useState(false);
+  const [isSharedOrNot, setIsSharedOrNot] = useState(false);
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -30,6 +36,10 @@ function RecipeInProgress() {
   }, [location.pathname]);
 
   useEffect(() => {
+    setIsFavOrNot(favRecipe(id, recipe?.idMeal, recipe?.idDrink));
+  }, [id, recipe]);
+
+  useEffect(() => {
     const getStorage = () => `checkedItem_${location.pathname}`;
 
     localStorage.setItem(getStorage(), JSON.stringify(checkedItem));
@@ -43,6 +53,13 @@ function RecipeInProgress() {
       }
       return prevCheckedItems.filter((index) => index !== ingredientIndex);
     });
+  };
+
+  const shareToggle = () => {
+    const newURLAdress = `${window.location.origin}${window.location.pathname
+      .replace('/in-progress', '')}`;
+    navigator.clipboard.writeText(newURLAdress);
+    setIsSharedOrNot(true);
   };
 
   const renderItems = () => {
@@ -80,6 +97,10 @@ function RecipeInProgress() {
     return items;
   };
 
+  if (!recipe) {
+    return <div>Loading...</div>;
+  }
+
   const {
     strMealThumb,
     strMeal,
@@ -90,23 +111,37 @@ function RecipeInProgress() {
     strAlcoholic,
   } = recipe;
 
+  const handleFavorite = () => {
+    if (isFavOrNot) {
+      setIsFavOrNot(false);
+      saveFavRecipe(id, recipe, false);
+    } else {
+      setIsFavOrNot(true);
+      saveFavRecipe(id, recipe, true);
+    }
+  };
+
   return (
     <div>
       <div>
         <p data-testid="recipe-category">
           {strMeal ? strCategory : `${strCategory} : ${strAlcoholic}`}
         </p>
-        <button
-          data-testid="share-btn"
-        >
+        <button onClick={ shareToggle } data-testid="share-btn">
           Compartilhar
         </button>
-        {}
+        {isSharedOrNot && <p>Link copied!</p>}
         <button
           data-testid="favorite-btn"
           type="button"
+          onClick={ handleFavorite }
+          src={ isFavOrNot ? blackHeartIcon : whiteHeartIcon }
         >
-          {}
+          {isFavOrNot ? (
+            <img src={ blackHeartIcon } alt="Favorito" />
+          ) : (
+            <img src={ whiteHeartIcon } alt="Não favorito" />
+          )}
         </button>
       </div>
       <div>
@@ -125,6 +160,7 @@ function RecipeInProgress() {
         <p data-testid="instructions">{strInstructions}</p>
         <button
           data-testid="finish-recipe-btn"
+
         >
           Finalizar Receita
         </button>
@@ -133,4 +169,4 @@ function RecipeInProgress() {
   );
 }
 
-export default RecipeInProgress;
+export default RecipeInProgressPage;

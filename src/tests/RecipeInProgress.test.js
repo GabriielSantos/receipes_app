@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import drinks from '../../cypress/mocks/drinks';
 import App from '../App';
 import RecipeInProgress from '../pages/RecipeInProgress';
-import { renderWithRouter } from './helpers/renderWithRouter';
+import renderWithRouter from './helpers/renderWithRouter';
 
 describe('Verifica a página RecipeInProgress', () => {
   beforeEach(async () => {
