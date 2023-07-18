@@ -1,35 +1,28 @@
-import React from 'react';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import App from '../App';
+import React from 'react';
+import Login from '../pages/Login';
 import renderWithRouter from './helpers/renderWithRouter';
 
-describe('Testes da página de Login', () => {
-  test('Verifica se os inputs existem e se é validado corretamente o email e senha', () => {
-    const { history } = renderWithRouter(<App />);
-    const inputEmail = screen.getByTestId('email-input');
-    const inputPassword = screen.getByTestId('password-input');
-    const btnLogin = screen.getByTestId('login-submit-btn');
+describe('Testando componente Login', () => {
+  it('Testando os inputs E-mail e Password', async () => {
+    const { history } = renderWithRouter(<Login />);
+    const inputEmail = screen.getByTestId(/email-input/i);
+    const inputPassword = screen.getByTestId(/password-input/i);
+    const button = screen.getByTestId(/login-submit-btn/i);
     expect(inputEmail).toBeInTheDocument();
     expect(inputPassword).toBeInTheDocument();
-    expect(btnLogin).toBeInTheDocument();
-
-    expect(btnLogin).toBeDisabled();
-
-    userEvent.type(inputEmail, 'testes@teste.com');
-
-    expect(btnLogin).toBeDisabled();
-
-    userEvent.type(inputPassword, '1234567');
-
-    expect(btnLogin).toBeEnabled();
-
-    userEvent.click(btnLogin);
-
-    const {
-      location: { pathname },
-    } = history;
-
-    expect(pathname).toBe('/meals');
+    expect(button).toBeInTheDocument();
+    expect(button).toBeDisabled();
+    const email = 'test@test.com.br';
+    const password = '12345678';
+    userEvent.type(inputEmail, email);
+    userEvent.type(inputPassword, password);
+    expect(button).toBeEnabled();
+    userEvent.click(button);
+    await waitFor(() => {
+      const { location: { pathname } } = history;
+      expect(pathname).toBe('/meals');
+    });
   });
 });
