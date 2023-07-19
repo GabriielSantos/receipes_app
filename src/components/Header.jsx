@@ -35,15 +35,15 @@ export default function Header() {
   const getTitle = () => {
     switch (location.pathname) {
     case '/meals':
-      return 'MEALS';
+      return 'Meals';
     case '/drinks':
-      return 'DRINKS';
+      return 'Drinks';
     case '/profile':
-      return 'PROFILE';
+      return 'Profile';
     case '/done-recipes':
-      return 'DONE RECIPES';
+      return 'Done Recipes';
     case '/favorite-recipes':
-      return 'FAVORITE RECIPES';
+      return 'Favorite Recipes';
     default:
       return '';
     }
@@ -68,50 +68,52 @@ export default function Header() {
   };
 
   return (
-    <div className="headerContainer">
-      <div className="yellowContainer">
-        <img
-          src={ logoRecipes }
-          alt="logo"
-          className="logoRecipesP"
-        />
-        <h1 className="teste">
-          RECIPES
-          <span>app</span>
-        </h1>
-        <a
-          href="/profile"
-          onClick={ handleProfileClick }
-        >
+    <>
+      <div className="headerContainer">
+        <div className="yellowContainer">
           <img
-            className="profileIcon"
-            alt="Ícone de Perfil"
-            src={ profileIconY }
-            data-testid="profile-top-btn"
+            src={ logoRecipes }
+            alt="logo"
+            className="logoRecipesP"
           />
-        </a>
-        {showSearchIcon && (
-          <button
-            onClick={ handleSearchClick }
-            className="searchIcon"
+          <h1 className="teste">
+            RECIPES
+            <span>app</span>
+          </h1>
+          <a
+            href="/profile"
+            onClick={ handleProfileClick }
           >
             <img
-              alt="Ícone de Pesquisa"
-              src={ searchIcon }
-              data-testid="search-top-btn"
+              className="profileIcon"
+              alt="Ícone de Perfil"
+              src={ profileIconY }
+              data-testid="profile-top-btn"
             />
-          </button>
-        )}
+          </a>
+          {showSearchIcon && (
+            <button
+              onClick={ handleSearchClick }
+              className="searchIcon"
+            >
+              <img
+                alt="Ícone de Pesquisa"
+                src={ searchIcon }
+                data-testid="search-top-btn"
+              />
+            </button>
+          )}
+        </div>
+        <div className="whiteContainer">
+          <img
+            src={ getImage() }
+            alt="prato"
+            className="iconMeals"
+          />
+          <h1 data-testid="page-title">{getTitle()}</h1>
+        </div>
       </div>
-      <div className="whiteContainer">
-        <img
-          src={ getImage() }
-          alt="prato"
-          className="iconMeals"
-        />
-        <h1 data-testid="page-title">{getTitle()}</h1>
-        <SearchBar />
-      </div>
-    </div>
+      <SearchBar />
+    </>
   );
 }

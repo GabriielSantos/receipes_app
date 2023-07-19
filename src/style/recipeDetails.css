@@ -1,23 +1,27 @@
-.containerRecommendations {
-  display: flex;
-  overflow-x: scroll;
-  overflow-y: hidden;
-}
+ /* Recipe */
 
-.containerRecommendations img {
-  height: 170px;
-  width: 170px;
-}
+ /* Carousel de recomendacoes */
+ .containerRecommendations {
+   display: flex;
+   overflow-x: scroll;
+   overflow-y: hidden;
+ }
 
-.start-btn {
-  background-color: #f44336;
-  border: none;
-  bottom: 0;
-  color: white;
-  font-size: 16px;
-  left: 90px;
-  padding: 10px 20px;
-  position: fixed;
-  text-align: center;
-  text-decoration: none;
-}
+ .containerRecommendations img {
+   height: 135px;
+   width: 163px;
+ }
+
+ /* Fixed Button */
+ .start-btn {
+   background-color: #f44336;
+   border: none;
+   bottom: 0;
+   color: white;
+   font-size: 16px;
+   left: 90px;
+   padding: 10px 20px;
+   position: fixed;
+   text-align: center;
+   text-decoration: none;
+ }

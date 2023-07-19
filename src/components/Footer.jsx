@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import drinkIcon from '../style/imgs/iconDrinks.svg';
-import mealIcon from '../style/imgs/iconMeals.svg';
+import drinkIcon from '../images/drinkIcon.svg';
+import mealIcon from '../images/mealIcon.svg';
 import '../style/Footer.css';
 
 function Footer() {
@@ -18,8 +18,8 @@ function Footer() {
         >
           <img
             data-testid="drinks-bottom-btn"
-            alt="search"
             src={ drinkIcon }
+            alt="search"
           />
         </button>
         <button
