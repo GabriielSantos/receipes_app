@@ -1,67 +1,68 @@
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 .loginContainer {
-  background: linear-gradient(180deg, #41197F 60%, white 40%);
+  background: linear-gradient(180deg, #41197f 60%, white 40%);
   height: 100vh;
   overflow: hidden;
 }
 
 .logoRecipes {
-  position: relative;
-  width: 198px;
   height: 157px;
-  top: -220px;
   left: 81px;
+  position: relative;
+  top: -220px;
+  width: 198px;
 }
 
 .tomate {
-  position: relative;
-  width: 458px;
   height: 279px;
-  top: 215px;
   left: -60px;
+  position: relative;
+  top: 215px;
+  width: 458px;
 }
 
 .loginInputs {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .formContainer h3 {
-  margin-top: 25px;
-  margin-bottom: 15px;
-  text-align: center;
-  color: #41197F;
-  font-family: 'Epilogue', sans-serif;
-  line-height: 20px;
+  color: #41197f;
+  font-family: Epilogue , sans-serif;
   letter-spacing: 2px;
+  line-height: 20px;
+  margin-bottom: 15px;
+  margin-top: 25px;
+  text-align: center;
 }
 
 .loginInputs input {
-  padding: 10px;
-  margin-bottom: 5px;
   border: solid 0.5px #42197fa1;
   border-radius: 5px;
-  width: 276px;
+  color: #41197f;
   height: 40px;
-  color: #41197F;
+  margin-bottom: 5px;
+  padding: 10px;
+  width: 276px;
 }
 
 .loginInputs button {
-  padding: 10px;
-  width: 276px;
-  height: 40px;
-  background-color: #FCC436;
+  background-color: #fcc436;
   border: none;
   border-radius: 5px;
   color: white;
-  font-family: 'Epilogue', sans-serif;
+  font-family: Epilogue , sans-serif;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 700;
+  height: 40px;
+  padding: 10px;
+  width: 276px;
+
   /* letter-spacing: 2px; */
 }
