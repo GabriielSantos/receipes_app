@@ -1,0 +1,49 @@
+/* Estilizacao das categorias */
+.categoryContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 5px;
+}
+
+.categoryContainer button {
+  background-color: transparent;
+  border: none;
+}
+
+.categoryContainer img {
+  width: 45px;
+  height: 59px;
+}
+
+/* Estilizacao dos cards de receita */
+
+.recipesContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 5px;
+}
+
+.recipesContainer button {
+  background-color: transparent;
+  border: solid 0.5px #B1B1B1;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.recipesContainer img {
+  border-radius: 5px 5px 0px 0px;
+  width: 163px;
+  height: 135px;
+}
+
+.recipesContainer h3 {
+  font-family: 'Epilogue', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #1A1B1C;
+  margin: 8px;
+  text-align: start;
+}

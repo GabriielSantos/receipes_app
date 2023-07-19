@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import logoRecipes from '../style/imgs/logoRecipes.svg';
+import logoRecipes from '../style/imgs/logoRecipesG.svg';
 import tomate from '../style/imgs/tomate.svg';
 import '../style/Login.css';
 
@@ -24,7 +24,7 @@ function Login() {
   return (
     <div className="loginContainer">
       <img src={ tomate } alt="tomate" className="tomate" />
-      <img src={ logoRecipes } alt="logo" className="logoRecipes" />
+      <img src={ logoRecipes } alt="logo" className="logoRecipesG" />
       <section className="formContainer">
         <h3>LOGIN</h3>
         <form className="loginInputs">
