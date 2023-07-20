@@ -115,29 +115,36 @@ function RecipeDetails() {
 
   return (
     <div>
-      <button
-        type="button"
-        data-testid="share-btn"
-        onClick={ handleShare }
-      >
-        <img src={ shareIcon } alt="Share" />
-      </button>
-      <button
-        type="button"
-        onClick={ () => handleFavorite(idSelected.type) }
-      >
-        <img
-          data-testid="favorite-btn"
-          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-          alt={ isFavorite ? 'Favorite' : 'Not Favorite' }
-        />
-      </button>
+      <div className="btnFixed">
+        <button
+          type="button"
+          data-testid="share-btn"
+          onClick={ handleShare }
+        >
+          <img src={ shareIcon } alt="Share" />
+        </button>
+        {recipeDetails[0] && (
+          <h1 data-testid="recipe-title">
+            {idSelected.type === 'meals'
+              ? recipeDetails[0].strMeal
+              : recipeDetails[0].strDrink}
+          </h1>
+        )}
+        <button
+          type="button"
+          onClick={ () => handleFavorite(idSelected.type) }
+        >
+          <img
+            data-testid="favorite-btn"
+            src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+            alt={ isFavorite ? 'Favorite' : 'Not Favorite' }
+          />
+        </button>
+      </div>
       <p id="alert" />
-
       {idSelected.type === 'meals'
         ? recipeDetails && recipeDetails.map((recipe, index) => (
-          <div key={ index } className="recipeContainer">
-            <h1 data-testid="recipe-title">{recipe.strMeal}</h1>
+          <div key={ index } className="recipeMealContainer">
             <img
               src={ recipe.strMealThumb }
               alt={ recipe.strMeal }
@@ -148,12 +155,11 @@ function RecipeDetails() {
             </h2>
             <h3>Ingredients</h3>
             <ul>
-              {
-                showIngredients()
-              }
+              {showIngredients()}
             </ul>
             <h3>Instructions</h3>
             <p data-testid="instructions">{recipe.strInstructions}</p>
+            <h3>Video</h3>
             <iframe
               title="video"
               data-testid="video"
@@ -164,8 +170,7 @@ function RecipeDetails() {
           </div>
         ))
         : recipeDetails && recipeDetails.map((recipe, index) => (
-          <div key={ index }>
-            <h1 data-testid="recipe-title">{recipe.strDrink}</h1>
+          <div key={ index } className="recipeDrinkContainer">
             <img
               src={ recipe.strDrinkThumb }
               alt={ recipe.strDrink }

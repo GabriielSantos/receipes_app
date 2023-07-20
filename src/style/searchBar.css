@@ -1,47 +1,47 @@
 .searchContainer {
   background: linear-gradient(360deg, #41197f 80%, white 20%);
+  border-radius: 0 0 20px 20px;
   height: 118px;
-  width: 338px;
+  margin-bottom: 15px;
   margin-left: 11px;
   margin-top: 12px;
-  margin-bottom: 15px;
-  border-radius: 0 0 20px 20px;
+  width: 338px;
 }
 
 .searchInput {
+  background-color: white;
+  border: solid 1px #b1b1b1;
+  border-radius: 13px;
+  height: 40px;
+  padding: 10px;
   position: relative;
   width: 338px;
-  height: 40px;
-  border: solid 1px #b1b1b1;
-  background-color: white;
-  border-radius: 13px;
-  padding: 10px;
 }
 
 .radioButtons {
-  display: flex;
-  justify-content: space-around;
-  font-size: 13px;
-  padding: 12px;
   color: white;
+  display: flex;
+  font-size: 13px;
+  justify-content: space-around;
+  padding: 12px;
 }
 
 .radioButtons span {
+  font-family: Epilogue , sans-serif;
   margin-left: 7px;
-  font-family: Epilogue, sans-serif;
 }
 
 .searchContainer button {
-  position: relative;
   background-color: #fcc436;
-  font-family: Epilogue, sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  color: white;
-  left: 65px;
-  height: 25px;
-  width: 207px;
   border: none;
   border-radius: 5px;
+  color: white;
+  font-family: Epilogue , sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  height: 25px;
+  left: 65px;
+  position: relative;
   text-transform: uppercase;
+  width: 207px;
 }
