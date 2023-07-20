@@ -29,6 +29,8 @@
   border: solid 0.5px #b1b1b1;
   border-radius: 5px;
   margin: 5px;
+  overflow: hidden;
+  width: 163px;
 }
 
 .recipesContainer img {
@@ -43,5 +45,8 @@
   font-size: 12px;
   font-weight: 400;
   margin: 8px;
+  overflow: hidden;
   text-align: start;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

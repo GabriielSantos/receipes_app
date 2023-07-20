@@ -47,6 +47,14 @@
   width: 28px;
 }
 
+.profileIcon2 {
+  height: 29px;
+  position: relative;
+  right: 22px;
+  top: 12px;
+  width: 29px;
+}
+
 .searchIcon {
   background-color: transparent;
   border-style: none;
@@ -58,7 +66,7 @@
 }
 
 .iconMeals {
-  height: 29px;
+  height: 40px;
   width: 40px;
 }
 

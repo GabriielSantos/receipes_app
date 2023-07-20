@@ -85,7 +85,7 @@ export default function Header() {
             onClick={ handleProfileClick }
           >
             <img
-              className="profileIcon"
+              className={ showSearchIcon ? 'profileIcon' : 'profileIcon2' }
               alt="Ícone de Perfil"
               src={ profileIconY }
               data-testid="profile-top-btn"

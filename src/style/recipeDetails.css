@@ -2,6 +2,7 @@
 .containerRecommendations {
   display: flex;
   margin-bottom: 50px;
+  margin-top: 5px;
   overflow-x: scroll;
   overflow-y: hidden;
 }
@@ -31,31 +32,31 @@
 }
 
 /* Recipe */
-.recipeMealContainer {
+.recipeContainer {
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
-.recipeMealContainer img {
+.recipeContainer img {
   border-radius: 10px;
   height: 340px;
   width: 340px;
 }
 
-.recipeMealContainer h2 {
+.recipeContainer h2 {
   align-self: flex-start;
   margin-left: 35px;
   margin-top: 10px;
 }
 
-.recipeMealContainer h3:first-of-type {
+.recipeContainer h3:first-of-type {
   margin-top: 30px;
 }
 
-.recipeMealContainer ul {
+.recipeContainer ul {
   border: solid 1px #b1b1b1;
   border-radius: 10px;
   font-size: 14px;
@@ -65,24 +66,24 @@
   width: 300px;
 }
 
-.recipeMealContainer ul li {
+.recipeContainer ul li {
   margin-top: 3px;
 }
 
-.recipeMealContainer h3:nth-of-type( 2 ) {
+.recipeContainer h3:nth-of-type( 2 ) {
   margin-top: 20px;
 }
 
-.recipeMealContainer h3:last-of-type {
+.recipeContainer h3:last-of-type {
   margin-top: 20px;
 }
 
-.recipeMealContainer iframe {
+.recipeContainer iframe {
   border-radius: 5px;
   margin-bottom: 5px;
 }
 
-.recipeMealContainer p {
+.recipeContainer p {
   border: solid 1px #b1b1b1;
   border-radius: 10px;
   font-size: 14px;
@@ -110,8 +111,9 @@
   align-items: center;
   background-color: #41197f;
   display: flex;
+  height: 52px;
   justify-content: space-between;
-  min-height: 52px;
+  overflow: hidden;
 }
 
 .btnFixed button {
@@ -124,4 +126,19 @@
   color: #fcc436;
   font-size: 32px;
   font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.copied {
+  border-radius: 5px;
+  color: #41197f;
+  font-size: 14px;
+  font-weight: 700;
+  margin-left: 76px;
+  margin-top: 10px;
+  padding: 5px;
+  text-align: center;
+  width: 200px;
 }

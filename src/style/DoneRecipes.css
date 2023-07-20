@@ -1,0 +1,16 @@
+.favCategory {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+.favCategory button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.favCategory img {
+  height: 84px;
+  width: 66px;
+}

@@ -2,6 +2,10 @@ import React, { useEffect, useState, useContext } from 'react';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
 import RecipesContext from '../context/RecipesContext';
+import allToFav from '../style/imgs/allToFav.svg';
+import mealToFav from '../style/imgs/mealToFav.svg';
+import drinkToFav from '../style/imgs/drinkToFav.svg';
+import '../style/DoneRecipes.css';
 
 function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState([]);
@@ -31,27 +35,38 @@ function DoneRecipes() {
   return (
     <div>
       <Header />
-      <button
-        type="button"
-        data-testid="filter-by-all-btn"
-        onClick={ () => handleFilter('all') }
-      >
-        All
-      </button>
-      <button
-        type="button"
-        data-testid="filter-by-meal-btn"
-        onClick={ () => handleFilter('meal') }
-      >
-        Meals
-      </button>
-      <button
-        type="button"
-        data-testid="filter-by-drink-btn"
-        onClick={ () => handleFilter('drink') }
-      >
-        Drinks
-      </button>
+      <div className="favCategory">
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ () => handleFilter('all') }
+        >
+          <img
+            src={ allToFav }
+            alt="All"
+          />
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-meal-btn"
+          onClick={ () => handleFilter('meal') }
+        >
+          <img
+            src={ mealToFav }
+            alt="Meals"
+          />
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ () => handleFilter('drink') }
+        >
+          <img
+            src={ drinkToFav }
+            alt="Drinks"
+          />
+        </button>
+      </div>
 
       {filteredRecipes.map((recipe, index) => (
         <div id="divDoneRecipes" key={ recipe.id }>

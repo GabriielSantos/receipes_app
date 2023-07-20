@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useMemo, useContext } from 'react';
 import copy from 'clipboard-copy';
 import { getMealsDetails, getDrinksDetails } from '../services/api';
-import shareIcon from '../images/shareIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import shareIcon from '../style/imgs/share.svg';
+import blackHeartIcon from '../style/imgs/liked.svg';
+import whiteHeartIcon from '../style/imgs/toLike.svg';
 import RecipesContext from '../context/RecipesContext';
 import '../style/recipeDetails.css';
 
@@ -58,7 +58,6 @@ function RecipeDetails() {
       }, time);
     });
   };
-
   const handleFavorite = (type) => {
     const recDetails = recipeDetails[0];
     if (type === 'meals') {
@@ -95,7 +94,6 @@ function RecipeDetails() {
       setIsFavorite(true);
     }
   };
-
   const showIngredients = () => {
     const ingredients = [];
     const recDetails = recipeDetails[0];
@@ -141,36 +139,36 @@ function RecipeDetails() {
           />
         </button>
       </div>
-      <p id="alert" />
+      <p id="alert" className="copied" />
       {idSelected.type === 'meals'
         ? recipeDetails && recipeDetails.map((recipe, index) => (
-          <div key={ index } className="recipeMealContainer">
+          <div key={ index } className="recipeContainer">
             <img
               src={ recipe.strMealThumb }
               alt={ recipe.strMeal }
               data-testid="recipe-photo"
             />
-            <h2 data-testid="recipe-category">
-              {recipe.strCategory}
-            </h2>
+            <h2 data-testid="recipe-category">{recipe.strCategory}</h2>
             <h3>Ingredients</h3>
-            <ul>
-              {showIngredients()}
-            </ul>
+            <ul>{showIngredients()}</ul>
             <h3>Instructions</h3>
             <p data-testid="instructions">{recipe.strInstructions}</p>
-            <h3>Video</h3>
-            <iframe
-              title="video"
-              data-testid="video"
-              width="320"
-              height="240"
-              src={ recipe.strYoutube.replace('watch?v=', 'embed/') }
-            />
+            {recipe.strYoutube && (
+              <div>
+                <h3>Video</h3>
+                <iframe
+                  title="video"
+                  data-testid="video"
+                  width="320"
+                  height="240"
+                  src={ recipe.strYoutube.replace('watch?v=', 'embed/') }
+                />
+              </div>
+            )}
           </div>
         ))
         : recipeDetails && recipeDetails.map((recipe, index) => (
-          <div key={ index } className="recipeDrinkContainer">
+          <div key={ index } className="recipeContainer">
             <img
               src={ recipe.strDrinkThumb }
               alt={ recipe.strDrink }
