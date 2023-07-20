@@ -12,24 +12,26 @@ function Footer() {
       data-testid="footer"
       className="footer"
     >
-      <button
-        onClick={ () => history.push('/drinks') }
-      >
-        <img
-          data-testid="drinks-bottom-btn"
-          alt="search"
-          src={ drinkIcon }
-        />
-      </button>
-      <button
-        onClick={ () => history.push('/meals') }
-      >
-        <img
-          data-testid="meals-bottom-btn"
-          alt="search"
-          src={ mealIcon }
-        />
-      </button>
+      <div>
+        <button
+          onClick={ () => history.push('/drinks') }
+        >
+          <img
+            data-testid="drinks-bottom-btn"
+            src={ drinkIcon }
+            alt="search"
+          />
+        </button>
+        <button
+          onClick={ () => history.push('/meals') }
+        >
+          <img
+            data-testid="meals-bottom-btn"
+            alt="search"
+            src={ mealIcon }
+          />
+        </button>
+      </div>
     </footer>
   );
 }

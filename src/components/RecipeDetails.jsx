@@ -114,97 +114,119 @@ function RecipeDetails() {
   };
 
   return (
-    <>
-      <div>
-        {idSelected.type === 'meals'
-          ? recipeDetails && recipeDetails.map((recipe, index) => (
-            <div key={ index }>
-              <h1 data-testid="recipe-title">{recipe.strMeal}</h1>
-              <img
-                src={ recipe.strMealThumb }
-                alt={ recipe.strMeal }
-                data-testid="recipe-photo"
-              />
-              <h2 data-testid="recipe-category">
-                {recipe.strCategory}
-              </h2>
-              <h3>Ingredients</h3>
-              <ul>
-                {
-                  showIngredients()
-                }
-              </ul>
-              <h3>Instructions</h3>
-              <p data-testid="instructions">{recipe.strInstructions}</p>
-              <iframe
-                title="video"
-                data-testid="video"
-                width="320"
-                height="240"
-                src={ recipe.strYoutube.replace('watch?v=', 'embed/') }
-              />
-            </div>
-          ))
-          : recipeDetails && recipeDetails.map((recipe, index) => (
-            <div key={ index }>
-              <h1 data-testid="recipe-title">{recipe.strDrink}</h1>
-              <img
-                src={ recipe.strDrinkThumb }
-                alt={ recipe.strDrink }
-                data-testid="recipe-photo"
-              />
-              <h2 data-testid="recipe-category">
-                {
-                  recipe.strAlcoholic === 'Alcoholic'
-                    ? `${recipe.strCategory} - ${recipe.strAlcoholic}`
-                    : recipe.strCategory
-                }
-              </h2>
-              <h3>Ingredients</h3>
-              <ul>
-                {
-                  showIngredients()
-                }
-              </ul>
-              <h3>Instructions</h3>
-              <p data-testid="instructions">{recipe.strInstructions}</p>
-            </div>
-          ))}
-        <div
-          className="containerRecommendations"
+    <div>
+      <div className="btnFixed">
+        <button
+          type="button"
+          data-testid="share-btn"
+          onClick={ handleShare }
         >
-          {
-            idSelected.type === 'meals'
-              ? drinksSlice && drinksSlice.map((recipe, index) => (
-                <div key={ index }>
-                  <img
-                    src={ recipe.strDrinkThumb }
-                    alt={ recipe.strDrink }
-                    data-testid={ `${index}-recommendation-card` }
-                  />
-                  <h3
-                    data-testid={ `${index}-recommendation-title` }
-                  >
-                    {recipe.strDrink}
-                  </h3>
-                </div>
-              ))
-              : mealsSlice && mealsSlice.map((recipe, index) => (
-                <div key={ index }>
-                  <img
-                    src={ recipe.strMealThumb }
-                    alt={ recipe.strMeal }
-                    data-testid={ `${index}-recommendation-card` }
-                  />
-                  <h3
-                    data-testid={ `${index}-recommendation-title` }
-                  >
-                    {recipe.strMeal}
-                  </h3>
-                </div>
-              ))
-          }
-        </div>
+          <img src={ shareIcon } alt="Share" />
+        </button>
+        {recipeDetails[0] && (
+          <h1 data-testid="recipe-title">
+            {idSelected.type === 'meals'
+              ? recipeDetails[0].strMeal
+              : recipeDetails[0].strDrink}
+          </h1>
+        )}
+        <button
+          type="button"
+          onClick={ () => handleFavorite(idSelected.type) }
+        >
+          <img
+            data-testid="favorite-btn"
+            src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+            alt={ isFavorite ? 'Favorite' : 'Not Favorite' }
+          />
+        </button>
+      </div>
+      <p id="alert" />
+      {idSelected.type === 'meals'
+        ? recipeDetails && recipeDetails.map((recipe, index) => (
+          <div key={ index } className="recipeMealContainer">
+            <img
+              src={ recipe.strMealThumb }
+              alt={ recipe.strMeal }
+              data-testid="recipe-photo"
+            />
+            <h2 data-testid="recipe-category">
+              {recipe.strCategory}
+            </h2>
+            <h3>Ingredients</h3>
+            <ul>
+              {showIngredients()}
+            </ul>
+            <h3>Instructions</h3>
+            <p data-testid="instructions">{recipe.strInstructions}</p>
+            <h3>Video</h3>
+            <iframe
+              title="video"
+              data-testid="video"
+              width="320"
+              height="240"
+              src={ recipe.strYoutube.replace('watch?v=', 'embed/') }
+            />
+          </div>
+        ))
+        : recipeDetails && recipeDetails.map((recipe, index) => (
+          <div key={ index } className="recipeDrinkContainer">
+            <img
+              src={ recipe.strDrinkThumb }
+              alt={ recipe.strDrink }
+              data-testid="recipe-photo"
+            />
+            <h2 data-testid="recipe-category">
+              {
+                recipe.strAlcoholic === 'Alcoholic'
+                  ? `${recipe.strCategory} - ${recipe.strAlcoholic}`
+                  : recipe.strCategory
+              }
+            </h2>
+            <h3>Ingredients</h3>
+            <ul>
+              {
+                showIngredients()
+              }
+            </ul>
+            <h3>Instructions</h3>
+            <p data-testid="instructions">{recipe.strInstructions}</p>
+          </div>
+        ))}
+      <div
+        className="containerRecommendations"
+      >
+        {
+          idSelected.type === 'meals'
+            ? drinksSlice && drinksSlice.map((recipe, index) => (
+              <div key={ index }>
+                <img
+                  src={ recipe.strDrinkThumb }
+                  alt={ recipe.strDrink }
+                  data-testid={ `${index}-recommendation-card` }
+                />
+                <h3
+                  data-testid={ `${index}-recommendation-title` }
+                >
+                  {recipe.strDrink}
+                </h3>
+              </div>
+            ))
+            : mealsSlice && mealsSlice.map((recipe, index) => (
+              <div key={ index }>
+                <img
+                  src={ recipe.strMealThumb }
+                  alt={ recipe.strMeal }
+                  data-testid={ `${index}-recommendation-card` }
+                />
+                <h3
+                  data-testid={ `${index}-recommendation-title` }
+                >
+                  {recipe.strMeal}
+                </h3>
+              </div>
+            ))
+        }
       </div>
       <button
         className="start-btn"
@@ -221,25 +243,7 @@ function RecipeDetails() {
             : 'Start Recipe'
         }
       </button>
-      <button
-        type="button"
-        data-testid="share-btn"
-        onClick={ handleShare }
-      >
-        <img src={ shareIcon } alt="Share" />
-      </button>
-      <button
-        type="button"
-        onClick={ () => handleFavorite(idSelected.type) }
-      >
-        <img
-          data-testid="favorite-btn"
-          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-          alt={ isFavorite ? 'Favorite' : 'Not Favorite' }
-        />
-      </button>
-      <p id="alert" />
-    </>
+    </div>
   );
 }
 export default RecipeDetails;

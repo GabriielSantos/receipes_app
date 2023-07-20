@@ -1,4 +1,24 @@
 .footer {
+  background-color: #41197f;
   bottom: 0;
+  height: 52px;
   position: fixed;
+  width: 360px;
+}
+
+.footer button {
+  background-color: transparent;
+  border: none;
+}
+
+.footer div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 12px 40px;
+}
+
+.footer img {
+  height: 29px;
+  width: 40px;
 }
