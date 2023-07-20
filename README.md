@@ -8,7 +8,7 @@ Este projeto foi desenvolvido em uma equipe com 5 Desenvolvedores, onde utilizam
 ## Técnologias usadas
 
 Front-end:
-> Desenvolvido usando: React.js, React Route, Hooks, Context API para gerenciamento de Estados Globais, CSS3 (Replicação exata ao Figma), HTML5.
+> Desenvolvido usando: React.js, React Route, Hooks, Context API para gerenciamento de Estados Globais, Javascript, CSS3 (Replicação exata ao Figma), HTML5.
 
 
 ## Instalando Dependências
