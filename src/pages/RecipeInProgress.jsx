@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useHistory } from 'react-router-dom';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import { favRecipe,
@@ -7,6 +7,7 @@ import { favRecipe,
 
 function RecipeInProgressPage() {
   const { id } = useParams();
+  const history = useHistory();
   const location = useLocation();
   const [recipe, setRecipe] = useState(null);
   const [checkedItem, setCheckedItem] = useState([]);
@@ -111,6 +112,30 @@ function RecipeInProgressPage() {
     strAlcoholic,
   } = recipe;
 
+  const saveRecipeToLocalStorage = () => {
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+    const newRecipe = {
+      id: recipe?.idMeal || recipe?.idDrink,
+      nationality: recipe?.strArea || '',
+      name: recipe?.strMeal || recipe?.strDrink,
+      category: recipe?.strCategory || recipe?.strAlcoholic,
+      image: recipe?.strMealThumb || recipe?.strDrinkThumb,
+      tags: recipe?.strTags ? recipe?.strTags.split(',') : [],
+      alcoholicOrNot: recipe?.strAlcoholic || '',
+      type: recipe?.idMeal ? 'meal' : 'drink',
+      doneDate: new Date().toISOString(),
+    };
+    localStorage.setItem('doneRecipes', JSON.stringify([...doneRecipes, newRecipe]));
+  };
+
+  const isAllIngredientsChecked = checkedItem
+    .length === renderItems().length;
+
+  const finishRecipe = () => {
+    saveRecipeToLocalStorage();
+    history.push('/done-recipes');
+  };
+
   const handleFavorite = () => {
     if (isFavOrNot) {
       setIsFavOrNot(false);
@@ -160,6 +185,8 @@ function RecipeInProgressPage() {
         <p data-testid="instructions">{strInstructions}</p>
         <button
           data-testid="finish-recipe-btn"
+          onClick={ finishRecipe }
+          disabled={ !isAllIngredientsChecked }
 
         >
           Finalizar Receita

@@ -5,10 +5,15 @@ import App from '../App';
 import RecipeInProgress from '../pages/RecipeInProgress';
 import renderWithRouter from './helpers/renderWithRouter';
 
+const decorationOfItem = 'text-decoration: line-through solid rgb(0, 0, 0)';
+const recipeTitle = 'recipe-title';
+const DRINKS = '/drinks/178319/in-progress';
+const MEALS = '/meals/52771/in-progress';
+
 describe('Verifica a página RecipeInProgress', () => {
   beforeEach(async () => {
     renderWithRouter(<App />, { initialEntries: [MEALS] });
-    await waitFor(() => expect(screen.getByTestId(RECIPE_TITLE)).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByTestId(recipeTitle)).toBeInTheDocument());
   });
 
   it('É verificado se os elementos são renderizados corretamente para alimentos no RecipeInProgress', () => {
@@ -45,7 +50,7 @@ describe('handleFinish', () => {
         />
       </BrowserRouter>,
     );
-    await waitFor(() => expect(screen.getByTestId(RECIPE_TITLE)).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByTestId(recipeTitle)).toBeInTheDocument());
 
     const doneBtn = screen.getByTestId('finish-recipe-btn');
     expect(doneBtn).toBeInTheDocument();
@@ -68,5 +73,75 @@ describe('handleFinish', () => {
 
     const doneBtn = screen.getByTestId('finish-recipe-btn');
     expect(doneBtn).toBeEnabled();
+  });
+
+  it('É verificado se a adição e remoção de ingredientes funciona no RecipeInProgress', async () => {
+    global.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+      json: () => Promise.resolve(MEALS),
+    }));
+
+    renderWithRouter(<App />, { initialEntries: [MEALS] });
+
+    await waitFor(() => expect(screen.getByTestId(recipeTitle)).toBeInTheDocument());
+
+    const item1 = await screen.findByTestId('0-ingredient-step');
+    const item2 = await screen.findByTestId('1-ingredient-step');
+
+    expect(item1).toBeInTheDocument();
+    expect(item2).toBeInTheDocument();
+
+    fireEvent.click(item1);
+
+    expect(item1).toHaveStyle(decorationOfItem);
+    expect(item2).not.toHaveStyle(decorationOfItem);
+
+    fireEvent.click(item1);
+    expect(item1).not.toHaveStyle(decorationOfItem);
+  });
+
+  it('É verificado se o texto "Link copied!" é renderizado após clicar no botão de compartilhar', async () => {
+    global.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+      json: () => Promise.resolve(drinks),
+    }));
+
+    global.navigator.clipboard = {
+      writeText: jest.fn(),
+    };
+
+    renderWithRouter(<RecipeInProgress />, { initialEntries: [DRINKS] });
+
+    await waitFor(() => expect(screen.getByTestId(recipeTitle)).toBeInTheDocument());
+
+    const shareBtn = screen.getByTestId('share-btn');
+    expect(shareBtn).toBeInTheDocument();
+    fireEvent.click(shareBtn);
+
+    await waitFor(() => expect(screen.getByText(/link copied!/i)).toBeInTheDocument());
+  });
+
+  it('É verificado se o ícone correto é renderizado após clicar no botão de favoritar', async () => {
+    global.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+      json: () => Promise.resolve(drinks),
+    }));
+
+    renderWithRouter(<RecipeInProgress
+      isFavorite={ false }
+      blackHeartIcon="black-heart-icon.png"
+      whiteHeartIcon="white-heart-icon.png"
+    />, { initialEntries: [DRINKS] });
+
+    await waitFor(() => expect(screen.getByTestId(recipeTitle)).toBeInTheDocument());
+
+    const blackHeartIcon = screen.queryByAltText('Favorito');
+    const whiteHeartIcon = screen.getByAltText('Não favorito');
+
+    expect(blackHeartIcon).not.toBeInTheDocument();
+    expect(whiteHeartIcon).toBeInTheDocument();
+
+    const favoriteButton = screen.getByTestId('favorite-btn');
+    expect(favoriteButton).toBeInTheDocument();
+    fireEvent.click(favoriteButton);
+
+    await waitFor(() => expect(screen.queryByAltText('Favorito')).toBeInTheDocument());
   });
 });
