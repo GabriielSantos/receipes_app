@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useLocation, useHistory } from 'react-router-dom';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import { favRecipe,
-  saveFavRecipe } from '../services/InProgressStorageFunctions';
+import { useParams, useLocation } from 'react-router-dom';
+import copy from 'clipboard-copy';
+import whiteHeartIcon from '../style/imgs/toLike.svg';
+import blackHeartIcon from '../style/imgs/liked.svg';
+import shareIcon from '../style/imgs/share.svg';
+import {
+  favRecipe,
+  saveFavRecipe,
+} from '../services/InProgressStorageFunctions';
+import '../style/inProgress.css';
 
 function RecipeInProgressPage() {
   const { id } = useParams();
@@ -12,7 +17,6 @@ function RecipeInProgressPage() {
   const [recipe, setRecipe] = useState(null);
   const [checkedItem, setCheckedItem] = useState([]);
   const [isFavOrNot, setIsFavOrNot] = useState(false);
-  const [isSharedOrNot, setIsSharedOrNot] = useState(false);
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -57,10 +61,16 @@ function RecipeInProgressPage() {
   };
 
   const shareToggle = () => {
-    const newURLAdress = `${window.location.origin}${window.location.pathname
+    const url = `${window.location.origin}${location.pathname
       .replace('/in-progress', '')}`;
-    navigator.clipboard.writeText(newURLAdress);
-    setIsSharedOrNot(true);
+    copy(url).then(() => {
+      const time = 2000;
+      const alert = document.getElementById('alert');
+      alert.innerHTML = 'Link copied!';
+      setTimeout(() => {
+        alert.innerHTML = '';
+      }, time);
+    });
   };
 
   const renderItems = () => {
@@ -148,14 +158,11 @@ function RecipeInProgressPage() {
 
   return (
     <div>
-      <div>
-        <p data-testid="recipe-category">
-          {strMeal ? strCategory : `${strCategory} : ${strAlcoholic}`}
-        </p>
+      <div className="btnFixed">
         <button onClick={ shareToggle } data-testid="share-btn">
-          Compartilhar
+          <img src={ shareIcon } alt="share" />
         </button>
-        {isSharedOrNot && <p>Link copied!</p>}
+        <h1 data-testid="recipe-title">{strMeal || strDrink}</h1>
         <button
           data-testid="favorite-btn"
           type="button"
@@ -169,27 +176,38 @@ function RecipeInProgressPage() {
           )}
         </button>
       </div>
-      <div>
+
+      <p id="alert" className="copied" />
+
+      <div className="recipeContainer">
         <img
           data-testid="recipe-photo"
           src={ strMealThumb || strDrinkThumb }
           alt="foto da receita"
         />
-        <h1 data-testid="recipe-title">{strMeal || strDrink}</h1>
+        <h2 data-testid="recipe-category">
+          {strMeal ? strCategory : `${strCategory} : ${strAlcoholic}`}
+        </h2>
       </div>
-      <div>
-        <div>
-          <h2>Ingredientes:</h2>
+
+      <div className="inProgBody">
+        <h3>Ingredients</h3>
+        <div className="ingredients">
           {renderItems()}
         </div>
-        <p data-testid="instructions">{strInstructions}</p>
+
+        <h3>Instructions</h3>
+        <div className="instructions">
+          <p data-testid="instructions">{strInstructions}</p>
+        </div>
+
         <button
           data-testid="finish-recipe-btn"
           onClick={ finishRecipe }
           disabled={ !isAllIngredientsChecked }
-
+          className="finishBtn"
         >
-          Finalizar Receita
+          Finish Recipe
         </button>
       </div>
     </div>

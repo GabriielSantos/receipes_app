@@ -107,7 +107,7 @@ export default function Header() {
         <div className="whiteContainer">
           <img
             src={ getImage() }
-            alt="Ícone da página"
+            alt="prato"
             className="iconMeals"
           />
           <h1 data-testid="page-title">{getTitle()}</h1>
