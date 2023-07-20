@@ -34,7 +34,7 @@
   width: 30px;
 }
 
-.doneRecipesContainer button>img {
+.doneRecipesContainer button > img {
   height: 30px;
   width: 30px;
 }
@@ -43,7 +43,7 @@
   color: #1a1b1c;
   display: flex;
   flex-direction: column;
-  font-family: Epilogue, sans-serif;
+  font-family: Epilogue , sans-serif;
   font-size: 12px;
   font-weight: 700;
   line-height: 12px;
@@ -52,11 +52,9 @@
   text-decoration: none;
 }
 
-.doneRecipeBody a>h3 {}
-
 .doneRecipeBody p {
   color: #797d86;
-  font-family: Epilogue, sans-serif;
+  font-family: Epilogue , sans-serif;
   font-size: 9px;
   font-weight: 300;
   line-height: 9px;
@@ -77,17 +75,17 @@
   margin-top: 53px;
 }
 
-.doneRecipeBody button>img {
+.doneRecipeBody button > img {
   height: 20px;
   width: 20px;
 
 }
 
 .doneRecipeBody span {
-  font-family: Epilogue, sans-serif;
-  font-weight: 400;
-  font-size: 9px;
-  line-height: 9px;
   color: #797d86;
+  font-family: Epilogue , sans-serif;
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 9px;
   margin-left: 20px;
 }
