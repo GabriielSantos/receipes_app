@@ -28,9 +28,9 @@ Front-end:
 ## Executando Testes
 
 * Para rodar todos os testes:
-
+  
+  Rode o projeto em um terminal com o comando de execução, depois execute em um __outro terminal__ o comando abaixo:
   ```
-    Rode o projeto em um terminal com o comando de execução, depois execute em um __outro terminal__ o comando abaixo:
     npm run cy:open
   ```
 
