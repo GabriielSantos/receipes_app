@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
+import copy from 'clipboard-copy';
 import Header from '../components/Header';
-import shareIcon from '../images/shareIcon.svg';
+import shareIcon from '../style/imgs/share.svg';
 import RecipesContext from '../context/RecipesContext';
 import allToFav from '../style/imgs/allToFav.svg';
 import mealToFav from '../style/imgs/mealToFav.svg';
@@ -10,18 +11,24 @@ import '../style/DoneRecipes.css';
 function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState([]);
   const { filterType, setFilterType } = useContext(RecipesContext);
+  const [selectedCardIndex, setSelectedCardIndex] = useState(null);
 
   useEffect(() => {
     const storedDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
     setDoneRecipes(storedDoneRecipes);
   }, []);
 
-  const handleShareButton = (recipe) => {
+  const handleShareButton = (recipe, index) => {
     const url = `http://localhost:3000/${recipe.type}s/${recipe.id}`;
-    navigator.clipboard.writeText(url);
-    const copyLink = document.createElement('p');
-    copyLink.innerHTML = 'Link copied!';
-    document.getElementById('divDoneRecipes').appendChild(copyLink);
+    copy(url).then(() => {
+      const time = 2000;
+      const alert = document.getElementById('alert');
+      alert.innerHTML = 'Link copiado!';
+      setTimeout(() => {
+        alert.innerHTML = '';
+      }, time);
+    });
+    setSelectedCardIndex(index);
   };
 
   const handleFilter = (type) => {
@@ -35,7 +42,7 @@ function DoneRecipes() {
   return (
     <div>
       <Header />
-      <div className="favCategory">
+      <div className="doneCategory">
         <button
           type="button"
           data-testid="filter-by-all-btn"
@@ -69,7 +76,7 @@ function DoneRecipes() {
       </div>
 
       {filteredRecipes.map((recipe, index) => (
-        <div id="divDoneRecipes" key={ recipe.id }>
+        <div className="doneRecipesContainer" key={ recipe.id }>
           <a href={ `/${recipe.type}s/${recipe.id}` }>
             <img
               src={ recipe.image }
@@ -77,29 +84,32 @@ function DoneRecipes() {
               data-testid={ `${index}-horizontal-image` }
             />
           </a>
-          <p data-testid={ `${index}-horizontal-top-text` }>
-            {recipe.type === 'drink'
-              ? recipe.alcoholicOrNot : `${recipe.nationality} - ${recipe.category}`}
-          </p>
-          <a href={ `/${recipe.type}s/${recipe.id}` }>
-            <p data-testid={ `${index}-horizontal-name` }>{recipe.name}</p>
-          </a>
-          <p data-testid={ `${index}-horizontal-done-date` }>{recipe.doneDate}</p>
-          {recipe.tags.slice(0, 2).map((tag, tagIndex) => (
-            <span key={ tagIndex } data-testid={ `${index}-${tag}-horizontal-tag` }>
-              {tag}
-            </span>
-          ))}
-          <button
-            type="button"
-            onClick={ () => handleShareButton(recipe) }
-          >
-            <img
-              src={ shareIcon }
-              alt=""
-              data-testid={ `${index}-horizontal-share-btn` }
-            />
-          </button>
+          <div className="doneRecipeBody">
+            <a href={ `/${recipe.type}s/${recipe.id}` }>
+              <h3 data-testid={ `${index}-horizontal-name` }>{recipe.name}</h3>
+            </a>
+            <p data-testid={ `${index}-horizontal-top-text` }>
+              {recipe.type === 'drink'
+                ? recipe.alcoholicOrNot : `${recipe.nationality} - ${recipe.category}`}
+            </p>
+            <p data-testid={ `${index}-horizontal-done-date` }>{recipe.doneDate}</p>
+            {recipe.tags.slice(0, 2).map((tag, tagIndex) => (
+              <span key={ tagIndex } data-testid={ `${index}-${tag}-horizontal-tag` }>
+                {tag}
+              </span>
+            ))}
+            <button
+              type="button"
+              onClick={ () => handleShareButton(recipe, index) }
+            >
+              <img
+                src={ shareIcon }
+                alt=""
+                data-testid={ `${index}-horizontal-share-btn` }
+              />
+            </button>
+          </div>
+          {selectedCardIndex === index && <p id="alert" />}
         </div>
       ))}
     </div>
