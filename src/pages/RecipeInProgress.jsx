@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useHistory } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import whiteHeartIcon from '../style/imgs/toLike.svg';
 import blackHeartIcon from '../style/imgs/liked.svg';

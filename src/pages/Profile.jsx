@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import RecipesContext from '../context/RecipesContext';
 import Button from '../components/Button';
@@ -15,6 +15,13 @@ function Profile() {
   const { appState, setAppState } = useContext(RecipesContext);
   const { user } = appState;
   const history = useHistory();
+
+  useEffect(() => {
+    const userStorage = JSON.parse(localStorage.getItem('user'));
+    if (userStorage) {
+      setAppState({ user: { email: userStorage.email } });
+    }
+  }, [setAppState]);
 
   const handleLogout = () => {
     localStorage.clear();
