@@ -1,9 +1,86 @@
-img {
+/* img {
   height: 170px;
   width: 170px;
 }
 
-button > img {
+button>img {
   height: 30px;
   width: 30px;
+} */
+
+.favCategory {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+.favCategory button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.favCategory img {
+  height: 84px;
+  width: 66px;
+}
+
+.favRecipesContainer {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+}
+
+.favRecipesContainer img {
+  height: 170px;
+  width: 170px;
+}
+
+.favRecipesContainer button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+}
+
+.favRecipesContainer button > img {
+  height: 30px;
+  width: 30px;
+}
+
+.favRecipeBody a {
+  color: #1a1b1c;
+  display: flex;
+  flex-direction: column;
+  font-family: Epilogue , sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 12px;
+  margin-left: 20px;
+  margin-top: 30px;
+  text-decoration: none;
+}
+
+.favRecipeBody p {
+  color: #797d86;
+  font-family: Epilogue , sans-serif;
+  font-size: 9px;
+  font-weight: 300;
+  line-height: 9px;
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+.favRecipeBody {
+  border: solid 0.52px #b1b1b1;
+  border-left: none;
+  border-radius: 0 5px 5px 0;
+  height: 170px;
+  width: 170px;
+}
+
+.favRecipeBody button {
+  margin-left: 20px;
+  margin-top: 60px;
 }

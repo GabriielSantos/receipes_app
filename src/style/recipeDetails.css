@@ -1,23 +1,144 @@
+/* Carousel de recomendacoes */
 .containerRecommendations {
   display: flex;
+  margin-bottom: 50px;
+  margin-top: 5px;
   overflow-x: scroll;
   overflow-y: hidden;
 }
 
 .containerRecommendations img {
-  height: 170px;
-  width: 170px;
+  border-radius: 5px 5px 0 0;
+  height: 135px;
+  margin-left: 12px;
+  width: 163px;
 }
 
+.containerRecommendations h3 {
+  border: solid 1px #b1b1b1;
+  border-radius: 5px;
+  border-right: transparent;
+  border-top: transparent;
+  font-family: Epilogue , sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  height: 35px;
+  margin-left: 8px;
+  padding: 7px;
+  padding-left: 15px;
+  text-align: start;
+  text-transform: uppercase;
+  width: 163px;
+}
+
+/* Recipe */
+.recipeContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.recipeContainer img {
+  border-radius: 10px;
+  height: 340px;
+  width: 340px;
+}
+
+.recipeContainer h2 {
+  align-self: flex-start;
+  margin-left: 35px;
+  margin-top: 10px;
+}
+
+.recipeContainer h3:first-of-type {
+  margin-top: 30px;
+}
+
+.recipeContainer ul {
+  border: solid 1px #b1b1b1;
+  border-radius: 10px;
+  font-size: 14px;
+  list-style: inside;
+  margin-top: 8px;
+  padding: 10px;
+  width: 300px;
+}
+
+.recipeContainer ul li {
+  margin-top: 3px;
+}
+
+.recipeContainer h3:nth-of-type( 2 ) {
+  margin-top: 20px;
+}
+
+.recipeContainer h3:last-of-type {
+  margin-top: 20px;
+}
+
+.recipeContainer iframe {
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.recipeContainer p {
+  border: solid 1px #b1b1b1;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-top: 8px;
+  padding: 10px;
+  width: 300px;
+}
+
+/* Fixed Button */
 .start-btn {
-  background-color: #f44336;
+  background-color: #fcc436;
   border: none;
   bottom: 0;
   color: white;
   font-size: 16px;
-  left: 90px;
+  left: 8px;
   padding: 10px 20px;
   position: fixed;
   text-align: center;
   text-decoration: none;
+  width: 345px;
+}
+
+.btnFixed {
+  align-items: center;
+  background-color: #41197f;
+  display: flex;
+  height: 52px;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.btnFixed button {
+  background-color: transparent;
+  border: none;
+  margin: 0 40px;
+}
+
+.btnFixed h1 {
+  color: #fcc436;
+  font-size: 32px;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.copied {
+  border-radius: 5px;
+  color: #41197f;
+  font-size: 14px;
+  font-weight: 700;
+  margin-left: 76px;
+  margin-top: 10px;
+  padding: 5px;
+  text-align: center;
+  width: 200px;
 }

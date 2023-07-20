@@ -1,0 +1,79 @@
+.headerContainer {
+  background: linear-gradient(180deg, #fcdc36 35%, white 25%);
+  height: 147px;
+  overflow: hidden;
+  width: 360px;
+}
+
+.yellowContainer {
+  display: flex;
+  height: 51px;
+  justify-content: space-between;
+}
+
+.yellowContainer h1 {
+  color: #41197f;
+  font-family: Roboto , sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  position: relative;
+  top: 15px;
+}
+
+.yellowContainer h1 > span {
+  font-weight: 700;
+  margin-left: 5px;
+}
+
+.whiteContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+}
+
+.whiteContainer h1 {
+  color: #41197f;
+  font-family: Epilogue , sans-serif;
+  font-size: 22px;
+  margin-top: 10px;
+}
+
+.profileIcon {
+  height: 28px;
+  left: 5px;
+  position: relative;
+  top: 11px;
+  width: 28px;
+}
+
+.profileIcon2 {
+  height: 29px;
+  position: relative;
+  right: 22px;
+  top: 12px;
+  width: 29px;
+}
+
+.searchIcon {
+  background-color: transparent;
+  border-style: none;
+  height: 26px;
+  position: relative;
+  right: 20px;
+  top: 12px;
+  width: 26px;
+}
+
+.iconMeals {
+  height: 40px;
+  width: 40px;
+}
+
+.logoRecipesP {
+  height: 39px;
+  left: 15px;
+  position: relative;
+  top: 5px;
+  width: 42px;
+}
